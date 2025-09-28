@@ -1,0 +1,465 @@
+﻿/* =============================================================
+   1. GLOBAL & TYPOGRAPHY
+   ============================================================= */
+
+/* Import Google Font - Poppins for headings, Inter for body text */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap');
+
+/* Define CSS Variables for a clean, consistent, and easy-to-change theme */
+:root {
+    /* Color Palette */
+    --clr-bg-primary: #fbfbfb; /* Very Light Off-White */
+    --clr-bg-secondary: #ffffff; /* Pure White for cards/sections */
+    --clr-text-primary: #343a40; /* Dark Charcoal Gray */
+    --clr-text-secondary: #6c757d; /* Soft Gray for secondary text */
+    --clr-accent: #007788; /* Deep Teal/Ocean Blue - Elegant Accent */
+    --clr-accent-hover: #0099ad; /* Lighter Teal for Hover */
+    /* Typography */
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    /* Layout */
+    --max-width: 1200px;
+    --padding-section: 100px 5%;
+}
+
+/* Base Reset and Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--clr-bg-primary);
+    color: var(--clr-text-primary);
+    line-height: 1.65;
+    overflow-x: hidden; /* Prevent horizontal scroll from animations */
+}
+
+/* Headings */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--clr-text-primary);
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--clr-accent);
+}
+
+/* Links */
+a {
+    color: var(--clr-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    a:hover {
+        color: var(--clr-accent-hover);
+    }
+
+.section {
+    padding: var(--padding-section);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    /* Animation hook: يتم التحكم بها عبر JS */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* =============================================================
+   2. NAVIGATION BAR
+   ============================================================= */
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.98); /* Slightly transparent white */
+    backdrop-filter: blur(5px);
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--clr-accent);
+}
+
+.navbar nav ul {
+    list-style: none;
+    display: flex;
+}
+
+    .navbar nav ul li {
+        margin-left: 30px;
+    }
+
+        .navbar nav ul li a {
+            font-weight: 600;
+            color: var(--clr-text-primary);
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+            /* Elegant under-line animation on hover */
+            .navbar nav ul li a::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: var(--clr-accent);
+                transition: width 0.3s ease-out;
+            }
+
+            .navbar nav ul li a:hover::after {
+                width: 100%;
+            }
+
+/* =============================================================
+   3. HERO SECTION (Dynamic Intro)
+   ============================================================= */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 100px 5%;
+    background: linear-gradient(135deg, var(--clr-bg-primary) 0%, #f3f3f3 100%);
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px;
+    /* Initial state for intro animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1s ease-out 0.5s forwards;
+}
+
+.hero h1 {
+    font-size: 4.5rem;
+    margin-bottom: 0.1em;
+    color: var(--clr-text-primary);
+}
+
+.hero h2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--clr-accent);
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--clr-text-secondary);
+    margin-bottom: 40px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 14px 35px;
+    background-color: var(--clr-accent);
+    color: var(--clr-bg-secondary);
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+    .cta-button:hover {
+        background-color: var(--clr-accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 119, 136, 0.3);
+    }
+
+/* =============================================================
+   4. SECTION UTILITIES & TITLE
+   ============================================================= */
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+    /* Underline animation for section titles */
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: var(--clr-accent);
+        border-radius: 2px;
+    }
+
+/* =============================================================
+   5. ABOUT & SKILLS
+   ============================================================= */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Two columns for summary and links */
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.profile-summary p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    color: var(--clr-text-secondary);
+}
+
+.contact-links h3 {
+    margin-bottom: 20px;
+}
+
+.contact-links p {
+    margin-bottom: 10px;
+}
+
+/* Skills Section */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.skill-category {
+    background-color: var(--clr-bg-secondary);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid var(--clr-accent); /* Elegant accent border */
+    transition: transform 0.3s ease;
+}
+
+    .skill-category:hover {
+        transform: translateY(-5px); /* Subtle lift on hover */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-category h3 {
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+    }
+
+    .skill-category ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+        .skill-category ul li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 1rem;
+        }
+
+            .skill-category ul li:last-child {
+                border-bottom: none;
+            }
+
+            .skill-category ul li strong {
+                color: var(--clr-accent);
+                font-weight: 600;
+            }
+
+/* =============================================================
+   6. PROJECTS SECTION (Interactive Cards)
+   ============================================================= */
+
+#projects .section-title {
+    margin-bottom: 40px;
+}
+
+#projects .project-card {
+    background-color: var(--clr-bg-secondary);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother animation */
+}
+
+    /* Project Card Hover Animation (Key Elegance) */
+    #projects .project-card:hover {
+        transform: scale(1.02); /* Slight scale for prominence */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border-left: 8px solid var(--clr-accent); /* Highlight on hover */
+        padding-left: 22px; /* Adjust padding due to border */
+    }
+
+.project-card h3 {
+    color: var(--clr-text-primary);
+    margin-bottom: 10px;
+}
+
+.project-description {
+    color: var(--clr-text-secondary);
+    margin-bottom: 15px;
+}
+
+.project-tags {
+    display: inline-block;
+    background-color: #e9ecef; /* Light gray tag background */
+    color: var(--clr-text-secondary);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.project-link {
+    font-weight: 600;
+    display: block;
+    margin-top: 10px;
+    color: var(--clr-accent);
+}
+
+/* =============================================================
+   7. FOOTER (Contact)
+   ============================================================= */
+
+.footer {
+    background-color: var(--clr-text-primary); /* Dark footer for contrast */
+    color: var(--clr-bg-primary);
+    padding: 50px 5%;
+    text-align: center;
+}
+
+    .footer p {
+        margin-bottom: 10px;
+    }
+
+    .footer a {
+        color: var(--clr-accent-hover);
+        transition: color 0.3s ease;
+    }
+
+        .footer a:hover {
+            color: var(--clr-bg-secondary);
+        }
+
+.social-icons a {
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--clr-text-secondary); /* Use soft gray for copyright text */
+}
+
+/* =============================================================
+   8. ANIMATION KEYFRAMES & JAVASCRIPT HOOK
+   ============================================================= */
+
+/* Keyframe for the main section load-in (used via JavaScript) */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Class added by JavaScript when element is in view */
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero Section specific animation */
+.hero-content {
+    animation: fadeInSlideUp 1s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+/* =============================================================
+   9. MEDIA QUERIES (Responsiveness)
+   ============================================================= */
+
+@media (max-width: 992px) {
+    .about-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .navbar nav ul li {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+        .navbar nav {
+            margin-top: 15px;
+        }
+
+            .navbar nav ul {
+                flex-wrap: wrap;
+            }
+
+                .navbar nav ul li {
+                    margin-left: 0;
+                    margin-right: 15px;
+                    margin-bottom: 10px;
+                }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .section {
+        padding: 60px 5%;
+    }
+}
